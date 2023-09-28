@@ -1,0 +1,4 @@
+/home/andrey/Desktop/cpp_memes/os_lab_1/src/build/CMakeFiles/child.dir
+/home/andrey/Desktop/cpp_memes/os_lab_1/src/build/CMakeFiles/lab1.dir
+/home/andrey/Desktop/cpp_memes/os_lab_1/src/build/CMakeFiles/edit_cache.dir
+/home/andrey/Desktop/cpp_memes/os_lab_1/src/build/CMakeFiles/rebuild_cache.dir
