@@ -43,7 +43,7 @@ int main(int argc, char *argv[]) {
         dup2(pipefd[1], STDOUT_FILENO);
         //close(pipefd[1]);
 
-        execl("/home/andrey/Desktop/cpp_memes/os_lab_1/src/build/child", "child", NULL);//иначе не идет
+        execl("../src/build/child", "child", NULL);
 
         // Этот код выполняется только в случае неудачи запуска execl
         perror("execl");

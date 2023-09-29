@@ -4,11 +4,16 @@
 executable="../src/build/lab1"
 
 # Список файлов с данными
-data_files=("test1.txt" "test2.txt" "test3.txt" "test4.txt")
+test_files=("test1.txt" "test2.txt" "test3.txt" "test4.txt")
 
 # Перебираем файлы и запускаем программу для каждого из них
-for file in "${data_files[@]}"; do
+for ((i=0; i<${#test_files[@]}; i++)); do
     echo "Запуск программы для файла $file:"
-    $executable "$file"
+    $executable "${test_files[$i]}" 
+    if($executable "${test_files[$i]}" | diff - "good_res$((i+1)).txt"); then
+        echo "Пройдено"
+    else
+        echo "Не пройдено"
+    fi
     echo "--------------------------------------"
 done
