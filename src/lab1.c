@@ -15,15 +15,12 @@ int main(int argc, char *argv[]) {
         perror("pipe");
         exit(EXIT_FAILURE);
     }
-
     pid_t pid;
     pid = fork();
-
     if (pid == -1) {
         perror("fork");
         exit(EXIT_FAILURE);
     }
-
     if (pid == 0) {
         // Дочерний процесс
         pid = getpid();
@@ -37,26 +34,20 @@ int main(int argc, char *argv[]) {
             close(pipefd[1]); // Закрываем запись в канал
             exit(EXIT_FAILURE);
         }
-
         // Перенаправляем стандартный вывод в канал
-        dup2(file_fd, STDIN_FILENO);//возможно из-за это все ломается, попробовать протестить 
+        dup2(file_fd, STDIN_FILENO);
         dup2(pipefd[1], STDOUT_FILENO);
-        //close(pipefd[1]);
-
+        close(pipefd[1]);
         execl("../src/build/child", "child", NULL);
-
         // Этот код выполняется только в случае неудачи запуска execl
         perror("execl");
         exit(EXIT_FAILURE);
-        
     } else {
         // Родительский процесс
         pid = getpid();
         close(pipefd[1]);
-
         // Ждем завершения дочернего процесса
         wait(NULL);
-
         // Читаем число из канала
         char buffer; // Буфер для чтения данных
         ssize_t bytes_read;
@@ -65,9 +56,7 @@ int main(int argc, char *argv[]) {
         }
         char endline = '\n';
         write(STDOUT_FILENO, &endline, 1);
-
         close(pipefd[0]);
-
         exit(EXIT_SUCCESS);
     }
 
